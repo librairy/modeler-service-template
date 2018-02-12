@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -35,18 +36,18 @@ public class MyService implements ModelerService {
     @Override
     public List<Double> inference(String s) throws AvroRemoteException {
         //TODO
-        throw new RuntimeException("Method not implemented yet");
+        return Collections.emptyList();
     }
 
     @Override
     public List<Topic> topics() throws AvroRemoteException {
         //TODO
-        throw new RuntimeException("Method not implemented yet");
+        return Collections.emptyList();
     }
 
     @Override
     public List<Word> words(int i, int i1) throws AvroRemoteException {
         //TODO
-        throw new RuntimeException("Method not implemented yet");
+        return Collections.emptyList();
     }
 }
