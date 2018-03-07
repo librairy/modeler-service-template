@@ -30,7 +30,7 @@ public class MyServiceTest {
     public void inferenceTest() throws IOException {
 
 
-        List<Double> result = service.inference("sample text");
+        List<Double> result = service.shape("sample text");
 
         LOG.info("Result: " + result);
 

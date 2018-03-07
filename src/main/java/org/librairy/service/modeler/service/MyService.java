@@ -3,6 +3,7 @@ package org.librairy.service.modeler.service;
 import org.apache.avro.AvroRemoteException;
 import org.librairy.service.modeler.facade.model.ModelerService;
 import org.librairy.service.modeler.facade.model.Topic;
+import org.librairy.service.modeler.facade.model.TopicDistribution;
 import org.librairy.service.modeler.facade.model.Word;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,13 @@ public class MyService implements ModelerService {
     }
 
     @Override
-    public List<Double> inference(String s) throws AvroRemoteException {
+    public List<TopicDistribution> inference(String s) throws AvroRemoteException {
+        //TODO
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<Double> shape(String s) throws AvroRemoteException {
         //TODO
         return Collections.emptyList();
     }

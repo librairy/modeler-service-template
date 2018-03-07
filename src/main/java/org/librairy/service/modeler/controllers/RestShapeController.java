@@ -6,24 +6,25 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.apache.avro.AvroRemoteException;
 import org.librairy.service.modeler.facade.model.ModelerService;
-import org.librairy.service.modeler.facade.rest.model.TopicList;
+import org.librairy.service.modeler.facade.rest.model.InferenceRequest;
+import org.librairy.service.modeler.facade.rest.model.Shape;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/topics")
-@Api(tags="/topics", description="dimensions of the model")
-public class RestTopicsController {
+@RequestMapping("/shape")
+@Api(tags="/shape", description="topics distribution for a given text")
+public class RestShapeController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RestTopicsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RestShapeController.class);
 
     @Autowired
     ModelerService service;
@@ -38,14 +39,14 @@ public class RestTopicsController {
 
     }
 
-    @ApiOperation(value = "confirmation", nickname = "postTopics", response=TopicList.class)
+    @ApiOperation(value = "vector of topic relevance", nickname = "postShape", response=Shape.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = TopicList.class),
+            @ApiResponse(code = 200, message = "Success", response = Shape.class),
     })
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public TopicList topics()  {
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public Shape shape(@RequestBody InferenceRequest request)  {
         try {
-            return new TopicList(service.topics().stream().map(t -> new org.librairy.service.modeler.facade.rest.model.Topic(t)).collect(Collectors.toList()));
+            return new Shape(service.shape(request.getText()));
         } catch (AvroRemoteException e) {
             throw new RuntimeException(e);
         }

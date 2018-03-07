@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {AvroController.class,MyService.class})
