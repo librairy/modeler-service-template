@@ -8,6 +8,7 @@ import org.apache.avro.AvroRemoteException;
 import org.librairy.service.modeler.facade.model.ModelerService;
 import org.librairy.service.modeler.facade.rest.model.Inference;
 import org.librairy.service.modeler.facade.rest.model.InferenceRequest;
+import org.librairy.service.modeler.facade.rest.model.TopicDistribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/inference")
@@ -46,7 +48,7 @@ public class RestInferenceController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public Inference inference(@RequestBody InferenceRequest request)  {
         try {
-            return new Inference(service.inference(request.getText()));
+            return new Inference(service.inference(request.getText()).stream().map(td -> new TopicDistribution(td)).collect(Collectors.toList()));
         } catch (AvroRemoteException e) {
             throw new RuntimeException(e);
         }
