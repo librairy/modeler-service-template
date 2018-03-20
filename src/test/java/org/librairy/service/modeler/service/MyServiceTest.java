@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 /**
